@@ -12,6 +12,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import make_dataset
 import os
+import matplotlib.pyplot as plt 
 
 class Sampling(layers.Layer):
     """Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""
@@ -42,7 +43,7 @@ x = layers.Dense(8 * 75 * 128, activation="relu")(latent_inputs)
 x = layers.Reshape((8, 75, 128))(x)
 x = layers.Conv2DTranspose(64, (2,3), activation="relu", strides=2, padding="same")(x)
 x = layers.Conv2DTranspose(128, (2,3), activation="relu", strides=2, padding="same")(x)
-decoder_outputs = layers.Conv2DTranspose(1, 3, activation="sigmoid", padding="same")(x)
+decoder_outputs = layers.Conv2DTranspose(1, 3, activation="relu", padding="same")(x)
 decoder = keras.Model(latent_inputs, decoder_outputs, name="decoder")
 decoder.summary()
 
@@ -64,7 +65,8 @@ class VAE(keras.Model):
             self.reconstruction_loss_tracker,
             self.kl_loss_tracker,
         ]
-
+    
+    @tf.function
     def train_step(self, data):
         with tf.GradientTape() as tape:
             z_mean, z_log_var, z = self.encoder(data)
@@ -87,15 +89,25 @@ class VAE(keras.Model):
             "reconstruction_loss": self.reconstruction_loss_tracker.result(),
             "kl_loss": self.kl_loss_tracker.result(),
         }
+    
 
-#(x_train, _), (x_test, _) = keras.datasets.mnist.load_data()
 #%% load dataset
-dataset_dir = 'RGCtypes_1887/img/'
+dataset_dir = 'RGCtypes_1887'
 
-(train_set, test_set) = make_dataset.load_dataset(dataset_dir)
+[train_set, test_set] = make_dataset.load_dataset_no_labels(dataset_dir)
 
 #mnist_digits = np.concatenate([x_train, x_test], axis=0)
 #mnist_digits = np.expand_dims(mnist_digits, -1).astype("float32") / 255
+
+# %%make test sample
+
+num_examples_to_generate = 5
+
+# Pick a sample of the test set for generating output images
+for test_batch in test_set.take(1):
+    # Pick a sample of the test set for generating output images
+    test_sample = test_batch[0:num_examples_to_generate, :, :, :]
+
 
 # %%make model
 vae = VAE(encoder, decoder)
@@ -107,9 +119,38 @@ file_name = "weights_epoch_{epoch:03d}.h5"
 checkpoint_filepath = os.path.join('checkpoint', file_name)
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     save_weights_only=True,
+    monitor='loss',
+    save_best_only=True,
     filepath=checkpoint_filepath)
 
+# %%image save callback
+
+class SaveSampleImagesCallback(keras.callbacks.Callback):
+    def __init__(self, test_sample):
+        self.data = test_sample
+        
+    def on_epoch_end(self, epoch, logs=None):
+        [z_mean, z_logvar, z_sample]  = self.model.encoder.predict(self.data)
+        predictions = self.model.decoder.predict(z_sample)
+        N = self.data.shape[0]    
+        fig = plt.figure(figsize=(8, 2),
+                         tight_layout=True,
+                         dpi=300)
+        
+        for i in range(N):
+            fig.add_subplot(2, N, i + 1, title='data')
+            plt.imshow(self.data[i, :, :, 0], cmap='gray')
+            plt.axis('off')
+            fig.add_subplot(2, N, N + i + 1, title='reconstruction')
+            plt.imshow(predictions[i, :, :, 0], cmap='gray')
+            plt.axis('off')
+        
+        plt.savefig('training_img/image_at_epoch_{:04d}.png'.format(epoch))
+        plt.show()
+
+        
+images_callback = SaveSampleImagesCallback(test_sample)
 
 #%% train
 
-vae.fit(train_set, epochs=200, batch_size=32, callbacks=[model_checkpoint_callback])
+vae.fit(train_set, epochs=200, batch_size=32, callbacks=[model_checkpoint_callback, images_callback])

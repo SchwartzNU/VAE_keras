@@ -5,18 +5,40 @@ Created on Sat Aug 28 20:41:40 2021
 
 @author: gws584
 """
-import numpy as np
 import os
 import tensorflow as tf
 
-#dataset_dir = 'RGCtypes_1887'
-#labels = np.loadtxt('labels_int.txt').astype(int).tolist()
-
-
-def load_dataset(dataset_dir):
-
+def load_dataset_with_labels(dataset_dir):
     train_set = tf.keras.preprocessing.image_dataset_from_directory(
-        dataset_dir,
+        os.path.join(dataset_dir, 'train'),
+        label_mode="categorical",
+        labels = "inferred",
+        color_mode="grayscale",
+        batch_size=32,
+        image_size=(32, 300),
+        shuffle=True,
+        seed=1,
+        validation_split=0.15,
+        subset='training',
+    )
+
+    test_set = tf.keras.preprocessing.image_dataset_from_directory(
+        os.path.join(dataset_dir, 'test'),
+        label_mode="categorical", 
+        labels = "inferred",
+        color_mode="grayscale",
+        batch_size=32,
+        image_size=(32, 300),
+        shuffle=True,
+        seed=1,
+        validation_split=0.15,
+        subset='validation',
+    )
+    return train_set, test_set
+    
+def load_dataset_no_labels(dataset_dir):
+    train_set = tf.keras.preprocessing.image_dataset_from_directory(
+        os.path.join(dataset_dir, 'train'),
         label_mode=None,
         color_mode="grayscale",
         batch_size=32,
@@ -28,8 +50,8 @@ def load_dataset(dataset_dir):
     )
 
     test_set = tf.keras.preprocessing.image_dataset_from_directory(
-        dataset_dir,
-        label_mode=None,
+        os.path.join(dataset_dir, 'test'),
+        label_mode=None, 
         color_mode="grayscale",
         batch_size=32,
         image_size=(32, 300),
@@ -38,5 +60,4 @@ def load_dataset(dataset_dir):
         validation_split=0.15,
         subset='validation',
     )
-
     return train_set, test_set
