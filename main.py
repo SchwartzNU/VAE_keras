@@ -112,4 +112,4 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 
 #%% train
 
-vae.fit(train_set, epochs=30, batch_size=32, callbacks=[model_checkpoint_callback])
+vae.fit(train_set, epochs=100, batch_size=32, callbacks=[model_checkpoint_callback])
