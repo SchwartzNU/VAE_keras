@@ -1,0 +1,1887 @@
+ON horizontal OS large RF
+ON transient EW6t
+ON-OFF DS - dorsal
+OFF transient medium RF
+ON-OFF DS - ventral
+OFF transient medium RF
+HD2
+HD1
+F-mini-OFF
+ON transient small RF
+ON-OFF DS - dorsal
+Local edge detector
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON alpha
+ON-OFF DS - temporal
+ON small OFF large
+OFF transient alpha
+ON-OFF DS - temporal
+ON-OFF DS - ventral
+ON alpha
+HD2
+M6
+ON DS transient
+ON transient medium RF
+HD2
+ON horizontal OS large RF
+PixON
+HD2
+Local edge detector
+HD1
+ON-OFF DS - nasal
+ON alpha
+ON DS sustained - temporal
+ON transient EW6t
+OFF sustained alpha
+ON-OFF DS - temporal
+ON-OFF DS - dorsal
+OFF transient medium RF
+OFF sustained EW1no
+OFF transient medium RF
+UHD
+UHD
+OFF transient alpha
+UHD
+OFF transient medium RF
+F-mini-OFF
+M6
+ON delayed
+ON bursty
+ON transient medium RF
+UHD
+Sustained suppressed-by-contrast no surround EW27
+ON horizontal OS small RF
+F-mini-OFF
+ON transient small RF
+ON vertical OS small RF
+ON-OFF DS - nasal
+ON transient EW6t
+Sustained suppressed-by-contrast strong surround EW28
+Local edge detector
+OFF sustained EW1no
+ON-OFF DS - temporal
+Bursty suppressed by contrast
+ON-OFF DS - temporal
+ON vertical OS large RF
+M6
+OFF sustained EW3o
+ON delayed
+ON transient small RF
+OFF transient alpha
+OFF horizontal OS - symmetric
+ON bursty
+ON transient small RF
+ON delayed
+Sustained suppressed-by-contrast strong surround EW28
+OFF transient medium RF
+M2
+OFF vertical OS - asymmetric
+M2
+PixON
+F-mini-ON
+ON delayed
+ON vertical OS small RF
+ON DS sustained - ventral
+OFF transient medium RF
+Sustained suppressed-by-contrast strong surround EW28
+ON transient small RF
+OFF vertical OS - asymmetric
+F-mini-ON
+ON-OFF DS - temporal
+OFF medium sustained
+HD2
+Sustained suppressed-by-contrast no surround EW27
+PixON
+OFF horizontal OS - symmetric
+ON transient medium RF
+ON bursty
+ON transient small RF
+OFF vertical OS - asymmetric
+OFF sustained alpha
+ON DS sustained - dorsonasal
+ON vertical OS large RF
+ON DS sustained - ventral
+OFF sustained alpha
+ON DS sustained - ventral
+ON DS sustained - dorsonasal
+ON horizontal OS small RF
+ON horizontal OS large RF
+M2
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+Sustained suppressed-by-contrast strong surround EW28
+Bursty suppressed by contrast
+Sustained suppressed-by-contrast strong surround EW28
+OFF horizontal OS - symmetric
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+Sustained suppressed-by-contrast strong surround EW28
+OFF vertical OS - asymmetric
+Sustained suppressed-by-contrast no surround EW27
+Sustained suppressed-by-contrast no surround EW27
+Sustained suppressed-by-contrast no surround EW27
+Sustained suppressed-by-contrast no surround EW27
+Sustained suppressed-by-contrast no surround EW27
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+OFF sustained alpha
+OFF sustained alpha
+Bursty suppressed by contrast
+Bursty suppressed by contrast
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+Bursty suppressed by contrast
+OFF sustained EW1no
+OFF sustained EW1no
+OFF sustained EW1no
+OFF sustained EW1no
+OFF sustained EW1no
+OFF sustained EW1no
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+UHD
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+HD1
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+OFF medium sustained
+M6
+M6
+M6
+M6
+M6
+M6
+ON transient EW6t
+Local edge detector
+M6
+M6
+F-mini-ON
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+ON DS transient
+M6
+M6
+M6
+ON transient EW6t
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+ON DS transient
+M6
+M6
+M6
+M2
+ON transient EW6t
+M6
+M6
+M6
+M6
+M6
+M6
+M6
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient small RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient medium RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+M6
+ON transient medium RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+ON transient small RF
+OFF sustained EW3o
+OFF sustained EW1no
+OFF horizontal OS - symmetric
+OFF sustained EW3o
+OFF medium sustained
+OFF medium sustained
+OFF vertical OS - asymmetric
+OFF sustained EW3o
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+Local edge detector
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+ON transient EW6t
+HD1
+HD1
+Local edge detector
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+UHD
+HD1
+HD1
+ON transient EW6t
+HD1
+HD1
+HD1
+HD1
+HD1
+ON transient EW6t
+HD1
+HD1
+ON transient EW6t
+HD1
+HD1
+HD1
+HD1
+Local edge detector
+HD1
+HD1
+ON transient EW6t
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+HD1
+UHD
+HD1
+HD1
+HD1
+HD1
+HD1
+Local edge detector
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+F-mini-ON
+UHD
+HD2
+HD2
+UHD
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+UHD
+HD2
+HD2
+HD2
+HD2
+UHD
+HD2
+HD2
+UHD
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+Local edge detector
+HD2
+Local edge detector
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+UHD
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+HD2
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+UHD
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+Local edge detector
+M1
+M1
+M1
+M2
+M2
+M2
+M2
+M2
+ON horizontal OS large RF
+M2
+M2
+ON vertical OS large RF
+Motion sensor
+Motion sensor
+Motion sensor
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+OFF vertical OS - asymmetric
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+OFF horizontal OS - symmetric
+OFF vertical OS - asymmetric
+OFF vertical OS - asymmetric
+Sustained suppressed-by-contrast strong surround EW28
+OFF horizontal OS - symmetric
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient alpha
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient small RF
+F-mini-OFF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+F-mini-OFF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient medium RF
+OFF transient small RF
+OFF transient small RF
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON horizontal OS small RF
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON bursty
+ON DS sustained - temporal
+ON DS sustained - ventral
+ON DS sustained - ventral
+ON DS sustained - dorsonasal
+ON DS sustained - dorsonasal
+ON DS sustained - temporal
+ON DS sustained - temporal
+ON DS sustained - temporal
+ON DS sustained - dorsonasal
+ON DS sustained - dorsonasal
+ON-OFF DS - nasal
+ON DS sustained - dorsonasal
+ON DS sustained - dorsonasal
+ON DS sustained - dorsonasal
+ON DS sustained - dorsonasal
+ON DS sustained - dorsonasal
+ON DS sustained - temporal
+ON DS sustained - temporal
+ON DS sustained - temporal
+ON DS sustained - temporal
+ON DS sustained - temporal
+ON DS sustained - ventral
+ON DS sustained - temporal
+ON DS sustained - temporal
+ON DS transient
+ON DS transient
+ON DS transient
+ON DS transient
+ON DS transient
+ON DS transient
+ON DS transient
+ON DS transient
+OFF transient small RF
+ON DS sustained - ventral
+ON DS sustained - ventral
+ON DS sustained - ventral
+ON DS sustained - ventral
+ON DS sustained - ventral
+ON DS sustained - ventral
+ON DS sustained - ventral
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON bursty
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON vertical OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS large RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON vertical OS small RF
+ON horizontal OS small RF
+ON vertical OS large RF
+ON horizontal OS large RF
+ON horizontal OS large RF
+ON horizontal OS small RF
+ON horizontal OS large RF
+ON vertical OS large RF
+ON vertical OS large RF
+ON horizontal OS large RF
+ON horizontal OS small RF
+ON horizontal OS small RF
+ON horizontal OS large RF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+OFF transient small RF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+OFF horizontal OS - symmetric
+OFF transient medium RF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+OFF transient medium RF
+OFF sustained EW1no
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+OFF transient medium RF
+F-mini-OFF
+F-mini-OFF
+F-mini-OFF
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+UHD
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON transient small RF
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON small OFF large
+F-mini-ON
+ON transient small RF
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON DS transient
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON transient small RF
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON transient EW6t
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON DS transient
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON DS transient
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+F-mini-ON
+ON vertical OS small RF
+F-mini-OFF
+OFF transient medium RF
+Local edge detector
+M1
+ON DS transient
+ON DS transient
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+ON-OFF DS - dorsal
+ON horizontal OS small RF
+ON vertical OS large RF
+ON vertical OS small RF
+ON horizontal OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS large RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS small RF
+ON vertical OS large RF
+ON vertical OS large RF
+ON vertical OS large RF
+ON vertical OS small RF
+ON vertical OS large RF
+ON vertical OS small RF
+ON alpha
+ON bursty
+ON vertical OS large RF
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON delayed
+ON transient EW6t
+Local edge detector
+ON transient EW6t
+ON transient EW6t
+ON vertical OS small RF
+ON transient EW6t
+ON transient EW6t
+ON transient EW6t
+ON transient EW6t
+PixON
+ON transient EW6t
+ON transient EW6t
+ON small OFF large
+ON small OFF large
+ON small OFF large
+ON small OFF large
+ON small OFF large
+ON small OFF large
+ON small OFF large
+OFF medium sustained
+Sustained suppressed-by-contrast no surround EW27
+ON transient small RF
+ON DS transient
+ON DS transient
+ON DS transient
+ON DS transient
+ON DS transient
+M6
+ON transient medium RF
+ON transient medium RF
+ON transient small RF
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - dorsal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - nasal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - temporal
+ON-OFF DS - ventral
+ON-OFF DS - temporal
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+ON-OFF DS - ventral
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+ON transient EW6t
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+ON alpha
+PixON
+PixON
+PixON
+PixON
+PixON
+PixON
+Bursty suppressed by contrast
+UHD
+UHD
+UHD
+OFF medium sustained
+M2
+ON-OFF DS - temporal
+ON-OFF DS - dorsal
+ON vertical OS large RF
+ON DS transient
+F-mini-OFF
+ON-OFF DS - ventral
+Sustained suppressed-by-contrast strong surround EW28
+ON transient EW6t
+ON transient medium RF
+ON alpha
+ON alpha
+UHD
+F-mini-OFF
+ON vertical OS small RF
+ON-OFF DS - nasal
+ON-OFF DS - ventral
+ON horizontal OS large RF
+M1
+Sustained suppressed-by-contrast strong surround EW28
+ON transient medium RF
+M6
+ON vertical OS large RF
+ON alpha
+M1
+ON vertical OS large RF
+PixON
+ON transient medium RF
+ON-OFF DS - ventral
+HD1
+F-mini-ON
+Sustained suppressed-by-contrast strong surround EW28
+ON transient small RF
+ON-OFF DS - ventral
+ON transient small RF
+ON vertical OS small RF
+OFF vertical OS - asymmetric
+ON-OFF DS - dorsal
+ON horizontal OS small RF
+OFF transient small RF
+OFF transient medium RF
+Sustained suppressed-by-contrast no surround EW27
+ON horizontal OS small RF
+PixON
+ON-OFF DS - ventral
+ON horizontal OS large RF
+ON horizontal OS large RF
+ON delayed
+HD1
+ON alpha
+ON-OFF DS - temporal
+ON vertical OS small RF
+ON vertical OS large RF
+ON transient small RF
+ON transient small RF
+OFF transient alpha
+ON-OFF DS - ventral
+ON alpha
+Sustained suppressed-by-contrast strong surround EW28
+Local edge detector
+ON transient medium RF
+OFF sustained alpha
+OFF transient alpha
+OFF sustained alpha
+ON alpha
+ON alpha
+ON alpha
+ON alpha
+OFF transient alpha
+ON-OFF DS - ventral
+OFF sustained alpha
+ON alpha
+OFF transient alpha
+OFF sustained alpha
+OFF transient alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF transient alpha
+ON alpha
+ON alpha
+OFF sustained alpha
+ON alpha
+OFF sustained alpha
+ON alpha
+ON alpha
+OFF transient alpha
+ON alpha
+ON alpha
+OFF transient alpha
+OFF sustained alpha
+OFF sustained alpha
+OFF sustained alpha
+ON alpha
+OFF transient alpha
+ON alpha
+OFF transient alpha
+ON DS sustained - dorsonasal
+OFF sustained EW1no
+Local edge detector
+UHD
+HD2
+ON bursty
+ON vertical OS large RF
+ON vertical OS large RF
+ON bursty
+ON transient EW6t
+ON DS sustained - temporal
+OFF transient small RF
+UHD
+OFF vertical OS - asymmetric
+ON-OFF DS - dorsal
+ON transient EW6t
+F-mini-ON
+ON alpha
+ON-OFF DS - ventral
+ON vertical OS small RF
+ON transient small RF
+Motion sensor
+ON transient EW6t
+ON transient medium RF
+ON transient EW6t
+ON DS transient
+ON transient medium RF
+ON horizontal OS small RF
+ON DS sustained - temporal
+ON vertical OS small RF
+Sustained suppressed-by-contrast no surround EW27
+ON-OFF DS - ventral
+ON horizontal OS large RF
+F-mini-OFF
+ON transient small RF
+OFF sustained EW1no
+OFF vertical OS - asymmetric
+ON-OFF DS - dorsal
+PixON
+F-mini-ON
+ON vertical OS large RF
+OFF sustained EW1no
+Local edge detector
+OFF sustained EW1no
+Bursty suppressed by contrast
+OFF vertical OS - asymmetric
+Bursty suppressed by contrast
+HD2
+ON-OFF DS - nasal
+OFF transient medium RF
+ON transient EW6t
+OFF medium sustained
+OFF vertical OS - asymmetric
+ON alpha
+M2
+F-mini-ON
+OFF vertical OS - asymmetric
+ON bursty
+ON-OFF DS - dorsal
+OFF sustained EW1no
+ON horizontal OS small RF
+OFF sustained EW1no
+UHD
+HD2
+ON-OFF DS - nasal
+PixON
+HD2
+HD1
+F-mini-ON
+UHD
+M6
+M2
+HD2
+OFF horizontal OS - symmetric
+ON-OFF DS - nasal
+ON alpha
+ON alpha
+ON alpha
+ON-OFF DS - ventral
+PixON
+OFF sustained alpha
+HD2
+ON DS sustained - dorsonasal
+Sustained suppressed-by-contrast strong surround EW28
+ON alpha
+PixON

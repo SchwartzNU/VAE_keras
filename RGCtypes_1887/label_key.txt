@@ -1,0 +1,43 @@
+RGC_types,index
+Bursty suppressed by contrast,1
+F-mini-OFF,2
+F-mini-ON,3
+HD1,4
+HD2,5
+Local edge detector,6
+M1,7
+M2,8
+M6,9
+Motion sensor,10
+OFF horizontal OS - symmetric,11
+OFF medium sustained,12
+OFF sustained EW1no,13
+OFF sustained EW3o,14
+OFF sustained alpha,15
+OFF transient alpha,16
+OFF transient medium RF,17
+OFF transient small RF,18
+OFF vertical OS - asymmetric,19
+ON DS sustained - dorsonasal,20
+ON DS sustained - temporal,21
+ON DS sustained - ventral,22
+ON DS transient,23
+ON alpha,24
+ON bursty,25
+ON delayed,26
+ON horizontal OS large RF,27
+ON horizontal OS small RF,28
+ON small OFF large,29
+ON transient EW6t,30
+ON transient medium RF,31
+ON transient small RF,32
+ON vertical OS large RF,33
+ON vertical OS small RF,34
+ON-OFF DS - dorsal,35
+ON-OFF DS - nasal,36
+ON-OFF DS - temporal,37
+ON-OFF DS - ventral,38
+PixON,39
+Sustained suppressed-by-contrast no surround EW27,40
+Sustained suppressed-by-contrast strong surround EW28,41
+UHD,42
