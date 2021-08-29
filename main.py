@@ -103,7 +103,7 @@ vae.compile(optimizer=keras.optimizers.Adam())
 
 # %%checkpoint callback
 
-file_name = "weights_epoch_{epoch:02d}.h5"
+file_name = "weights_epoch_{epoch:03d}.h5"
 checkpoint_filepath = os.path.join('checkpoint', file_name)
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     save_weights_only=True,
@@ -112,4 +112,4 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 
 #%% train
 
-vae.fit(train_set, epochs=100, batch_size=32, callbacks=[model_checkpoint_callback])
+vae.fit(train_set, epochs=200, batch_size=32, callbacks=[model_checkpoint_callback])
