@@ -127,7 +127,7 @@ for test_batch in test_set.take(1):
 
 # %%make model
 vae = VAE(encoder, decoder)
-vae.compile(optimizer=keras.optimizers.Adadelta())
+vae.compile(optimizer=keras.optimizers.Adam())
 
 # %%checkpoint callback
 
@@ -145,8 +145,15 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 class SaveSampleImagesCallback(keras.callbacks.Callback):
     def __init__(self, test_sample):
         self.data = test_sample
+        self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
+        self.loss_file.write('loss\treconstruction_loss\tkl_loss\n')
         
     def on_epoch_end(self, epoch, logs=None):
+        loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
+            logs['loss'],logs['reconstruction_loss'],logs['kl_loss'])
+        print(loss_str)
+        self.loss_file.write(loss_str)
+                              
         [z_mean, z_logvar, z_sample]  = self.model.encoder.predict(self.data)
         predictions = self.model.decoder.predict(z_sample)
         N = self.data.shape[0]    
@@ -164,6 +171,9 @@ class SaveSampleImagesCallback(keras.callbacks.Callback):
         
         plt.savefig('training_img_latdim{}/image_at_epoch_{:04d}.png'.format(latent_dim,epoch))
         # plt.show()
+    
+    def on_train_end(self, logs=None):
+        self.loss_file.close()
 
 os.makedirs('training_img_latdim{}'.format(latent_dim), exist_ok=True)        
 images_callback = SaveSampleImagesCallback(test_sample)
