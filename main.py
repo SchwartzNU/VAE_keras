@@ -44,7 +44,7 @@ encoder_inputs = keras.Input(shape=(32, 300, 1))
 x = layers.Conv2D(64, (2,3), activation="relu", strides=2, padding="same")(encoder_inputs)
 x = layers.Conv2D(128, (2,3), activation="relu", strides=2, padding="same")(x)
 x = layers.Flatten()(x)
-x = layers.Dense(128, activation="relu")(x)
+x = layers.Dense(32, activation="relu")(x)
 z_mean = layers.Dense(latent_dim, name="z_mean")(x)
 z_log_var = layers.Dense(latent_dim, 
                          kernel_initializer='zeros',
@@ -54,12 +54,11 @@ encoder = keras.Model(encoder_inputs, [z_mean, z_log_var, z], name="encoder")
 encoder.summary()
 
 latent_inputs = keras.Input(shape=(latent_dim,))
-x = layers.Dense(8 * 75 * 128, activation="relu",
-                 kernel_initializer='zeros')(latent_inputs)
+x = layers.Dense(8 * 75 * 128, activation="relu")(latent_inputs)
 x = layers.Reshape((8, 75, 128))(x)
 x = layers.Conv2DTranspose(64, (2,3), activation="relu", strides=2, padding="same")(x)
 x = layers.Conv2DTranspose(128, (2,3), activation="relu", strides=2, padding="same")(x)
-decoder_outputs = layers.Conv2DTranspose(1, 3, activation=None, padding="same")(x)
+decoder_outputs = layers.Conv2DTranspose(1, 3, activation='relu', padding="same")(x)
 decoder = keras.Model(latent_inputs, decoder_outputs, name="decoder")
 decoder.summary()
 
@@ -128,7 +127,7 @@ for test_batch in test_set.take(1):
 
 # %%make model
 vae = VAE(encoder, decoder)
-vae.compile(optimizer=keras.optimizers.Adam())
+vae.compile(optimizer=keras.optimizers.Adadelta())
 
 # %%checkpoint callback
 
