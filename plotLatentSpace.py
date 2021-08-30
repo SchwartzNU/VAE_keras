@@ -4,7 +4,9 @@
 Created on Sun Aug 29 20:07:59 2021
 
 @author: gws584
-"""
+"""''
+import numpy as np
+import matplotlib.pyplot as plt 
 
 #%% plot latent space
 
@@ -12,7 +14,7 @@ def plot_latent_space(vae, n=20, figsize=(11,3)):
     # display a n*n 2D manifold of digits
     nR = 32
     nC = 300
-    scale = 8.0
+    scale = 50.0
     figure = np.zeros((nR * n, nC * n))
     # linearly spaced coordinates corresponding to the 2D plot
     # of digit classes in the latent space

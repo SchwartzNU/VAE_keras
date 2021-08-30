@@ -22,12 +22,21 @@ parser.add_argument("-latent_dim",
                     help="latent dimensions")
 parser.add_argument("-epochs", 
                     type=int, 
-                    default=100,
+                    default=500,
                     help="number of training epochs")
+parser.add_argument("-loadweights", 
+                    type=str, 
+                    help="weight file to start")
 args = parser.parse_args()
 
 latent_dim = args.latent_dim
 epochs = args.epochs
+
+if args.loadweights is not None:
+    weights_fname = os.path.join('checkpoint_latdim{}'.format(latent_dim), 
+                                 '{}.h5'.format(args.loadweights))
+else:
+    weights_fname = None
 
 class Sampling(layers.Layer):
     """Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""
@@ -44,7 +53,7 @@ encoder_inputs = keras.Input(shape=(32, 300, 1))
 x = layers.Conv2D(64, (2,3), activation="relu", strides=2, padding="same")(encoder_inputs)
 x = layers.Conv2D(128, (2,3), activation="relu", strides=2, padding="same")(x)
 x = layers.Flatten()(x)
-x = layers.Dense(32, activation="relu")(x)
+x = layers.Dense(16*latent_dim, activation="relu")(x)
 z_mean = layers.Dense(latent_dim, name="z_mean")(x)
 z_log_var = layers.Dense(latent_dim, 
                          kernel_initializer='zeros',
@@ -145,8 +154,12 @@ model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
 class SaveSampleImagesCallback(keras.callbacks.Callback):
     def __init__(self, test_sample):
         self.data = test_sample
-        self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
-        self.loss_file.write('loss\treconstruction_loss\tkl_loss\n')
+        if weights_fname is not None:
+            self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "a")
+            self.loss_file.write('loaded weigths {}'.format(weights_fname))
+        else:
+            self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
+            self.loss_file.write('loss\treconstruction_loss\tkl_loss\n')
         
     def on_epoch_end(self, epoch, logs=None):
         loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
@@ -178,7 +191,11 @@ class SaveSampleImagesCallback(keras.callbacks.Callback):
 os.makedirs('training_img_latdim{}'.format(latent_dim), exist_ok=True)        
 images_callback = SaveSampleImagesCallback(test_sample)
 
+
 #%% train
+if weights_fname is not None:
+    vae.built = True;
+    vae.load_weights(weights_fname)
 
 vae.fit(train_set, epochs=epochs, batch_size=32, callbacks=[model_checkpoint_callback, images_callback])
 
