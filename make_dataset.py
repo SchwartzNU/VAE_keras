@@ -17,7 +17,7 @@ def load_dataset_with_labels(dataset_dir):
         batch_size=32,
         image_size=(32, 300),
         shuffle=True,
-        seed=1,
+        seed=2,
     )
 
     test_set = tf.keras.preprocessing.image_dataset_from_directory(
@@ -28,7 +28,7 @@ def load_dataset_with_labels(dataset_dir):
         batch_size=32,
         image_size=(32, 300),
         shuffle=True,
-        seed=1,
+        seed=2,
     )
     return train_set, test_set
     
@@ -40,7 +40,7 @@ def load_dataset_no_labels(dataset_dir):
         batch_size=32,
         image_size=(32, 300),
         shuffle=True,
-        seed=1,
+        seed=2,
     )
 
     test_set = tf.keras.preprocessing.image_dataset_from_directory(
@@ -50,6 +50,6 @@ def load_dataset_no_labels(dataset_dir):
         batch_size=32,
         image_size=(32, 300),
         shuffle=True,
-        seed=1,
+        seed=2,
     )
     return train_set, test_set

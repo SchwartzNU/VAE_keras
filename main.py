@@ -44,9 +44,10 @@ encoder_inputs = keras.Input(shape=(32, 300, 1))
 x = layers.Conv2D(64, (2,3), activation="relu", strides=2, padding="same")(encoder_inputs)
 x = layers.Conv2D(128, (2,3), activation="relu", strides=2, padding="same")(x)
 x = layers.Flatten()(x)
-x = layers.Dense(32, activation="relu")(x)
+x = layers.Dense(128, activation="relu")(x)
 z_mean = layers.Dense(latent_dim, name="z_mean")(x)
-z_log_var = layers.Dense(latent_dim, name="z_log_var")(x)
+z_log_var = layers.Dense(latent_dim, 
+                         name="z_log_var")(x)
 z = Sampling()([z_mean, z_log_var])
 encoder = keras.Model(encoder_inputs, [z_mean, z_log_var, z], name="encoder")
 encoder.summary()
@@ -56,7 +57,7 @@ x = layers.Dense(8 * 75 * 128, activation="relu")(latent_inputs)
 x = layers.Reshape((8, 75, 128))(x)
 x = layers.Conv2DTranspose(64, (2,3), activation="relu", strides=2, padding="same")(x)
 x = layers.Conv2DTranspose(128, (2,3), activation="relu", strides=2, padding="same")(x)
-decoder_outputs = layers.Conv2DTranspose(1, 3, activation="relu", padding="same")(x)
+decoder_outputs = layers.Conv2DTranspose(1, 3, activation=None, padding="same")(x)
 decoder = keras.Model(latent_inputs, decoder_outputs, name="decoder")
 decoder.summary()
 
@@ -84,6 +85,7 @@ class VAE(keras.Model):
         with tf.GradientTape() as tape:
             z_mean, z_log_var, z = self.encoder(data)
             reconstruction = self.decoder(z)
+            # reconstruction = tf.boolean_mask(reconstruction, tf.math.is_finite(reconstruction)) #get rid of nans
             reconstruction_loss = tf.reduce_mean(
                 tf.reduce_sum(
                     keras.losses.mean_squared_error(data, reconstruction), axis=(1, 2)
