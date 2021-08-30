@@ -47,13 +47,15 @@ x = layers.Flatten()(x)
 x = layers.Dense(128, activation="relu")(x)
 z_mean = layers.Dense(latent_dim, name="z_mean")(x)
 z_log_var = layers.Dense(latent_dim, 
+                         kernel_initializer='zeros',
                          name="z_log_var")(x)
 z = Sampling()([z_mean, z_log_var])
 encoder = keras.Model(encoder_inputs, [z_mean, z_log_var, z], name="encoder")
 encoder.summary()
 
 latent_inputs = keras.Input(shape=(latent_dim,))
-x = layers.Dense(8 * 75 * 128, activation="relu")(latent_inputs)
+x = layers.Dense(8 * 75 * 128, activation="relu",
+                 kernel_initializer='zeros')(latent_inputs)
 x = layers.Reshape((8, 75, 128))(x)
 x = layers.Conv2DTranspose(64, (2,3), activation="relu", strides=2, padding="same")(x)
 x = layers.Conv2DTranspose(128, (2,3), activation="relu", strides=2, padding="same")(x)
