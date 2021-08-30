@@ -13,6 +13,21 @@ from tensorflow.keras import layers
 import make_dataset
 import os
 import matplotlib.pyplot as plt 
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-latent_dim", 
+                    type=int, 
+                    default=2,
+                    help="latent dimensions")
+parser.add_argument("-epochs", 
+                    type=int, 
+                    default=100,
+                    help="number of training epochs")
+args = parser.parse_args()
+
+latent_dim = args.latent_dim
+epochs = args.epochs
 
 class Sampling(layers.Layer):
     """Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""
@@ -24,8 +39,6 @@ class Sampling(layers.Layer):
         epsilon = tf.keras.backend.random_normal(shape=(batch, dim))
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
 
-
-latent_dim = 2
 
 encoder_inputs = keras.Input(shape=(32, 300, 1))
 x = layers.Conv2D(64, (2,3), activation="relu", strides=2, padding="same")(encoder_inputs)
@@ -115,8 +128,9 @@ vae.compile(optimizer=keras.optimizers.Adam())
 
 # %%checkpoint callback
 
+os.makedirs('checkpoint_latdim{}'.format(latent_dim), exist_ok=True)        
 file_name = "weights_epoch_{epoch:03d}.h5"
-checkpoint_filepath = os.path.join('checkpoint', file_name)
+checkpoint_filepath = os.path.join('checkpoint_latdim{}'.format(latent_dim), file_name)
 model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
     save_weights_only=True,
     monitor='loss',
@@ -145,12 +159,15 @@ class SaveSampleImagesCallback(keras.callbacks.Callback):
             plt.imshow(predictions[i, :, :, 0], cmap='gray')
             plt.axis('off')
         
-        plt.savefig('training_img/image_at_epoch_{:04d}.png'.format(epoch))
-        plt.show()
+        plt.savefig('training_img_latdim{}/image_at_epoch_{:04d}.png'.format(latent_dim,epoch))
+        # plt.show()
 
-        
+os.makedirs('training_img_latdim{}'.format(latent_dim), exist_ok=True)        
 images_callback = SaveSampleImagesCallback(test_sample)
 
 #%% train
 
-vae.fit(train_set, epochs=200, batch_size=32, callbacks=[model_checkpoint_callback, images_callback])
+vae.fit(train_set, epochs=epochs, batch_size=32, callbacks=[model_checkpoint_callback, images_callback])
+
+
+
