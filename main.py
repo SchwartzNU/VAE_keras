@@ -16,6 +16,22 @@ import matplotlib.pyplot as plt
 import argparse
 
 parser = argparse.ArgumentParser()
+parser.add_argument("-mode", 
+                    type=str,
+                    default='train',
+                    help="run mode: train | generate")
+parser.add_argument("-N_per_type", 
+                    type=int,
+                    default=10,
+                    help="number of examples per type in generate mode")
+parser.add_argument("-log_var_scale", 
+                    type=float,
+                    default=8.0,
+                    help="variancce scaling in latent space for generate mode")
+parser.add_argument("-write_train_img", 
+                    type=bool,
+                    default=False,
+                    help="whether to write training images and loss on each epoch") #TODO: separate these
 parser.add_argument("-latent_dim", 
                     type=int, 
                     default=2,
@@ -130,21 +146,18 @@ class VAE(keras.Model):
     
 
 #%% load dataset
-dataset_dir = 'RGCtypes_1887'
-
-[train_set, test_set] = make_dataset.load_dataset_no_labels(dataset_dir)
-
-#mnist_digits = np.concatenate([x_train, x_test], axis=0)
-#mnist_digits = np.expand_dims(mnist_digits, -1).astype("float32") / 255
+if args.mode == 'train':
+    dataset_dir = 'RGCtypes_1887'
+    [train_set, test_set] = make_dataset.load_dataset_no_labels(dataset_dir)
 
 # %%make test sample
 
-num_examples_to_generate = 5
-
-# Pick a sample of the test set for generating output images
-for test_batch in test_set.take(1):
+if args.mode == 'train' and args.write_train_img == True:
+    num_examples_to_generate = 5
     # Pick a sample of the test set for generating output images
-    test_sample = test_batch[0:num_examples_to_generate, :, :, :]
+    for test_batch in test_set.take(1):
+        # Pick a sample of the test set for generating output images
+        test_sample = test_batch[0:num_examples_to_generate, :, :, :]
 
 
 # %%make model
@@ -157,64 +170,74 @@ vae.compile(optimizer=optimizer)
 
 # %%checkpoint callback
 
-os.makedirs('checkpoint_latdim{}'.format(latent_dim), exist_ok=True)        
-file_name = "weights_epoch_{epoch:03d}.h5"
-checkpoint_filepath = os.path.join('checkpoint_latdim{}'.format(latent_dim), file_name)
-model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
-    save_weights_only=True,
-    monitor='loss',
-    save_best_only=True,
-    filepath=checkpoint_filepath)
+if args.mode == 'train':
+    os.makedirs('checkpoint_latdim{}'.format(latent_dim), exist_ok=True)        
+    file_name = "weights_epoch_{epoch:03d}.h5"
+    checkpoint_filepath = os.path.join('checkpoint_latdim{}'.format(latent_dim), file_name)
+    model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+        save_weights_only=True,
+        monitor='loss',
+        save_best_only=True,
+        filepath=checkpoint_filepath)
 
 # %%image save callback
-
-class SaveSampleImagesCallback(keras.callbacks.Callback):
-    def __init__(self, test_sample):
-        self.data = test_sample
-        if weights_fname is not None:
-            self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "a")
-            self.loss_file.write('loaded weigths {}\n'.format(weights_fname))
-        else:
-            self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
-            self.loss_file.write('loss\treconstruction_loss\tkl_loss\n')
+if args.mode == 'train' and args.write_train_img == True:
+    class SaveSampleImagesCallback(keras.callbacks.Callback):
+        def __init__(self, test_sample):
+            self.data = test_sample
+            if weights_fname is not None:
+                self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "a")
+                self.loss_file.write('loaded weigths {}\n'.format(weights_fname))
+            else:
+                self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
+                self.loss_file.write('loss\treconstruction_loss\tkl_loss\n')
+            
+        def on_epoch_end(self, epoch, logs=None):
+            loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
+                logs['loss'],logs['reconstruction_loss'],logs['kl_loss'])
+            print(loss_str)
+            self.loss_file.write(loss_str)
+                                  
+            [z_mean, z_logvar, z_sample]  = self.model.encoder.predict(self.data)
+            predictions = self.model.decoder.predict(z_sample)
+            N = self.data.shape[0]    
+            fig = plt.figure(figsize=(8, 2),
+                             tight_layout=True,
+                             dpi=300)
+            
+            for i in range(N):
+                fig.add_subplot(2, N, i + 1, title='data')
+                plt.imshow(self.data[i, :, :, 0], cmap='gray')
+                plt.axis('off')
+                fig.add_subplot(2, N, N + i + 1, title='reconstruction')
+                plt.imshow(predictions[i, :, :, 0], cmap='gray')
+                plt.axis('off')
+            
+            plt.savefig('training_img_latdim{}/image_at_epoch_{:04d}.png'.format(latent_dim,epoch))
+            # plt.show()
         
-    def on_epoch_end(self, epoch, logs=None):
-        loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
-            logs['loss'],logs['reconstruction_loss'],logs['kl_loss'])
-        print(loss_str)
-        self.loss_file.write(loss_str)
-                              
-        [z_mean, z_logvar, z_sample]  = self.model.encoder.predict(self.data)
-        predictions = self.model.decoder.predict(z_sample)
-        N = self.data.shape[0]    
-        fig = plt.figure(figsize=(8, 2),
-                         tight_layout=True,
-                         dpi=300)
-        
-        for i in range(N):
-            fig.add_subplot(2, N, i + 1, title='data')
-            plt.imshow(self.data[i, :, :, 0], cmap='gray')
-            plt.axis('off')
-            fig.add_subplot(2, N, N + i + 1, title='reconstruction')
-            plt.imshow(predictions[i, :, :, 0], cmap='gray')
-            plt.axis('off')
-        
-        plt.savefig('training_img_latdim{}/image_at_epoch_{:04d}.png'.format(latent_dim,epoch))
-        # plt.show()
+        def on_train_end(self, logs=None):
+            self.loss_file.close()
     
-    def on_train_end(self, logs=None):
-        self.loss_file.close()
-
-os.makedirs('training_img_latdim{}'.format(latent_dim), exist_ok=True)        
-images_callback = SaveSampleImagesCallback(test_sample)
+    os.makedirs('training_img_latdim{}'.format(latent_dim), exist_ok=True)        
+    images_callback = SaveSampleImagesCallback(test_sample)
 
 
 #%% train
-if weights_fname is not None:
-    vae.built = True;
-    vae.load_weights(weights_fname)
+if args.mode == 'train':
+    if weights_fname is not None:
+        vae.built = True;
+        vae.load_weights(weights_fname) 
+    vae.fit(train_set, epochs=epochs, batch_size=32, callbacks=[model_checkpoint_callback, images_callback])
 
-vae.fit(train_set, epochs=epochs, batch_size=32, callbacks=[model_checkpoint_callback, images_callback])
-
-
+#%% generate data
+if args.mode == 'generate':
+    vae.built = True
+    if weights_fname is not None:
+        vae.load_weights(weights_fname) 
+    import GenerateFromTrainedModel as gen 
+    validated_dir = 'RGCtypes_validated_473'
+    (train_set, test_set) = make_dataset.load_dataset_with_labels(validated_dir)
+    gen.generate_data(vae,train_set,N_per_type=args.N_per_type,log_var_scale=args.log_var_scale)
+    
 
