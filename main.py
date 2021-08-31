@@ -27,9 +27,9 @@ parser.add_argument("-epochs",
 parser.add_argument("-loadweights", 
                     type=str, 
                     help="weight file to start")
-parser.add_argument("-adam_beta1", 
+parser.add_argument("-adam_beta2", 
                     type=float, 
-                    help="beta_1 parameter for the Adam optimizer algorithm")
+                    help="beta_2 parameter for the Adam optimizer algorithm")
 args = parser.parse_args()
 
 latent_dim = args.latent_dim
@@ -41,10 +41,10 @@ if args.loadweights is not None:
 else:
     weights_fname = None
     
-if args.adam_beta1 is not None:
-    beta1 = args.adam_beta1
+if args.adam_beta2 is not None:
+    beta2 = args.adam_beta2
 else:
-    beta1 = None    
+    beta2 = None    
 
 class Sampling(layers.Layer):
     """Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""
@@ -144,8 +144,8 @@ for test_batch in test_set.take(1):
 
 # %%make model
 vae = VAE(encoder, decoder)
-if beta1 is not None:
-    optimizer = keras.optimizers.Adam(beta_1 = beta1)
+if beta2 is not None:
+    optimizer = keras.optimizers.Adam(beta_2 = beta2)
 else:
     optimizer = keras.optimizers.Adam()
 
