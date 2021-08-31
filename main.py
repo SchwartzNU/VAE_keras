@@ -228,7 +228,11 @@ if args.mode == 'train':
     if weights_fname is not None:
         vae.built = True;
         vae.load_weights(weights_fname) 
-    vae.fit(train_set, epochs=epochs, batch_size=32, callbacks=[model_checkpoint_callback, images_callback])
+    if args.write_train_img == True:
+        callback_list = [model_checkpoint_callback, images_callback]
+    else:
+        callback_list = [model_checkpoint_callback]
+    vae.fit(train_set, epochs=epochs, batch_size=32, callbacks=callback_list)
 
 #%% generate data
 if args.mode == 'generate':
