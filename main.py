@@ -27,6 +27,9 @@ parser.add_argument("-epochs",
 parser.add_argument("-loadweights", 
                     type=str, 
                     help="weight file to start")
+parser.add_argument("-adam_beta1", 
+                    type=float, 
+                    help="beta_1 parameter for the Adam optimizer algorithm")
 args = parser.parse_args()
 
 latent_dim = args.latent_dim
@@ -37,6 +40,11 @@ if args.loadweights is not None:
                                  '{}.h5'.format(args.loadweights))
 else:
     weights_fname = None
+    
+if args.adam_beta1 is not None:
+    beta1 = args.adam_beta1
+else:
+    beta1 = None    
 
 class Sampling(layers.Layer):
     """Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""
@@ -136,7 +144,12 @@ for test_batch in test_set.take(1):
 
 # %%make model
 vae = VAE(encoder, decoder)
-vae.compile(optimizer=keras.optimizers.Adam())
+if beta1 is not None:
+    optimizer = keras.optimizers.Adam(beta_1 = beta1)
+else:
+    optimizer = keras.optimizers.Adam()
+
+vae.compile(optimizer=optimizer)
 
 # %%checkpoint callback
 
@@ -156,7 +169,7 @@ class SaveSampleImagesCallback(keras.callbacks.Callback):
         self.data = test_sample
         if weights_fname is not None:
             self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "a")
-            self.loss_file.write('loaded weigths {}'.format(weights_fname))
+            self.loss_file.write('loaded weigths {}\n'.format(weights_fname))
         else:
             self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
             self.loss_file.write('loss\treconstruction_loss\tkl_loss\n')
