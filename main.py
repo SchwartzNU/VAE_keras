@@ -46,6 +46,14 @@ def main():
     parser.add_argument("-loadweights", 
                         type=int,
                         help="index weight file to start from")
+    parser.add_argument("-batch_size", 
+                        type=int,
+                        default=32,
+                        help="training batch size")
+    parser.add_argument("-cross_validate",
+                        type=bool,
+                        default=True,
+                        help="cross validate on each epoch, holding out 20% of the training set")
     parser.add_argument("-adam_alpha", 
                         type=float, 
                         default=0.001,
@@ -238,7 +246,21 @@ def main():
             callback_list = [model_checkpoint_callback, images_callback]
         else:
             callback_list = [model_checkpoint_callback]
-        vae.fit(train_set, epochs=load_weights+epochs, batch_size=32, callbacks=callback_list, initial_epoch = load_weights)
+        
+        if args.cross_validate:
+            vae.fit(train_set, 
+                    epochs=load_weights+epochs, 
+                    batch_size=args.batch_size, 
+                    callbacks=callback_list, 
+                    initial_epoch = load_weights)
+
+        else:
+            vae.fit(train_set, 
+                    validation_split = 0.2,
+                    epochs=load_weights+epochs,                     
+                    batch_size=args.batch_size, 
+                    callbacks=callback_list, 
+                    initial_epoch = load_weights)
 
     #%% generate data
     if args.mode == 'generate':
