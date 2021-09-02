@@ -145,7 +145,6 @@ def main():
             with tf.GradientTape() as tape:
                 kl_loss, total_loss, reconstruction_loss = self.get_loss(data)
                 validation_kl_loss, validation_total_loss, validation_reconstruction_loss = self.get_loss(self.validation_data)
-
             
                 grads = tape.gradient(total_loss, self.trainable_weights)
                 self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
@@ -153,6 +152,9 @@ def main():
                 self.reconstruction_loss_tracker.update_state(reconstruction_loss)
                 self.kl_loss_tracker.update_state(kl_loss)
 
+                self.validation_total_loss_tracker.update_state(validation_total_loss)
+                self.validation_reconstruction_loss_tracker.update_state(validation_reconstruction_loss)
+                self.validation_kl_loss_tracker.update_state(validation_kl_loss)
             
                 #self.validation_data <- use this to add a new loss
                 return {
