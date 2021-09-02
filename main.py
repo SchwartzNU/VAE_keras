@@ -46,6 +46,14 @@ def main():
     parser.add_argument("-loadweights", 
                         type=int,
                         help="index weight file to start from")
+    parser.add_argument("-batch_size", 
+                        type=int,
+                        default=32,
+                        help="training batch size")
+    parser.add_argument("-cross_validate",
+                        type=bool,
+                        default=True,
+                        help="cross validate on each epoch, holding out 20% of the training set")
     parser.add_argument("-adam_alpha", 
                         type=float, 
                         default=0.001,
@@ -231,17 +239,28 @@ def main():
 
     #%% train
     if args.mode == 'train':
+        print(f'Training model with required memory = {keras_model_memory_usage_in_bytes(vae, batch_size=32)/1024**3:.02f} GB')
         if weights_fname is not None:
             vae.built = True;
             vae.load_weights(weights_fname) 
         if args.write_train_img == True:
             callback_list = [model_checkpoint_callback, images_callback]
         else:
-            callback_list = [model_checkpoint_callback]
-        # print(f'Training model with required memory = {get_model_memory_usage(32, vae):.02f}')
-        print(f'Training model with required memory = {keras_model_memory_usage_in_bytes(vae, batch_size=32)/1024**3:.02f} GB')
-        
-        vae.fit(train_set, epochs=load_weights+epochs, batch_size=32, callbacks=callback_list, initial_epoch = load_weights)
+            callback_list = [model_checkpoint_callback]        
+        if args.cross_validate:
+            vae.fit(train_set, 
+                    epochs=load_weights+epochs, 
+                    batch_size=args.batch_size, 
+                    callbacks=callback_list, 
+                    initial_epoch = load_weights)
+
+        else:
+            vae.fit(train_set, 
+                    validation_split = 0.2,
+                    epochs=load_weights+epochs,                     
+                    batch_size=args.batch_size, 
+                    callbacks=callback_list, 
+                    initial_epoch = load_weights)
 
     #%% generate data
     if args.mode == 'generate':
