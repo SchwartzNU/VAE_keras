@@ -6,3 +6,5 @@ __pycache__/*
 *.txt
 generated/*
 .DS_Store
+
+.vscode

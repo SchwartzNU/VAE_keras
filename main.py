@@ -117,6 +117,8 @@ def main():
             super(VAE, self).__init__(**kwargs)
             self.encoder = encoder
             self.decoder = decoder
+
+            self.validation_data = None
             self.total_loss_tracker = keras.metrics.Mean(name="total_loss")
             self.reconstruction_loss_tracker = keras.metrics.Mean(
                 name="reconstruction_loss"
@@ -128,6 +130,22 @@ def main():
                 name="validation_reconstruction_loss"
             )
             self.validation_kl_loss_tracker = keras.metrics.Mean(name="validation_kl_loss")
+
+        def fit(self, *args, **kwargs):
+            if 'validation_split' in kwargs.keys():
+                fract = kwargs.pop('validation_split')
+                # n_training = int(args[0].unbatch().shape[0] * fract)
+                data = args[0].unbatch()
+                n_total = sum(1 for _ in data)
+                n_validate = int(n_total * fract)
+                n_training = n_total - n_validate
+
+                validation_data = tf.convert_to_tensor(list(data.skip(n_training)))
+                # print(len(validation_data))
+                print(validation_data.shape)
+                data = data.take(n_training).batch(kwargs['batch_size'])
+                self.validation_data = validation_data
+            super(VAE,self).fit(data, **kwargs)
 
         @property
         def metrics(self):
@@ -144,6 +162,8 @@ def main():
         def train_step(self, data):
             with tf.GradientTape() as tape:
                 kl_loss, total_loss, reconstruction_loss = self.get_loss(data)
+                print('got loss')
+                print(data)
                 validation_kl_loss, validation_total_loss, validation_reconstruction_loss = self.get_loss(self.validation_data)
             
                 grads = tape.gradient(total_loss, self.trainable_weights)
@@ -273,7 +293,7 @@ def main():
             callback_list = [model_checkpoint_callback, images_callback]
         else:
             callback_list = [model_checkpoint_callback]        
-        if args.cross_validate:
+        if not args.cross_validate:
             vae.fit(train_set, 
                     epochs=load_weights+epochs, 
                     batch_size=args.batch_size, 
@@ -281,8 +301,9 @@ def main():
                     initial_epoch = load_weights)
 
         else:
+            #need to add validation data here
             vae.fit(train_set, 
-                    validation_split = 0.2,
+                    validation_split = 0.05,
                     epochs=load_weights+epochs,                     
                     batch_size=args.batch_size, 
                     callbacks=callback_list, 
