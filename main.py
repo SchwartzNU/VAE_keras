@@ -238,6 +238,9 @@ def main():
             callback_list = [model_checkpoint_callback, images_callback]
         else:
             callback_list = [model_checkpoint_callback]
+        # print(f'Training model with required memory = {get_model_memory_usage(32, vae):.02f}')
+        print(f'Training model with required memory = {keras_model_memory_usage_in_bytes(vae, batch_size=32)/1024**3:.02f} GB')
+        
         vae.fit(train_set, epochs=load_weights+epochs, batch_size=32, callbacks=callback_list, initial_epoch = load_weights)
 
     #%% generate data
@@ -249,6 +252,56 @@ def main():
         validated_dir = 'RGCtypes_validated_473'
         (train_set, test_set) = make_dataset.load_dataset_with_labels(validated_dir)
         gen.generate_data(vae,train_set,N_per_type=args.N_per_type,log_var_scale=args.log_var_scale)
+
+def keras_model_memory_usage_in_bytes(model, *, batch_size: int):
+    """
+    Return the estimated memory usage of a given Keras model in bytes.
+    This includes the model weights and layers, but excludes the dataset.
+
+    The model shapes are multipled by the batch size, but the weights are not.
+
+    Args:
+        model: A Keras model.
+        batch_size: The batch size you intend to run the model with. If you
+            have already specified the batch size in the model itself, then
+            pass `1` as the argument here.
+    Returns:
+        An estimate of the Keras model's memory usage in bytes.
+
+    """
+    default_dtype = tf.keras.backend.floatx()
+    shapes_mem_count = 0
+    internal_model_mem_count = 0
+    for layer in model.layers:
+        if isinstance(layer, tf.keras.Model):
+            internal_model_mem_count += keras_model_memory_usage_in_bytes(
+                layer, batch_size=batch_size
+            )
+        single_layer_mem = tf.as_dtype(layer.dtype or default_dtype).size
+        out_shape = layer.output_shape
+        if isinstance(out_shape, list):
+            out_shape = out_shape[0]
+        for s in out_shape:
+            if s is None:
+                continue
+            single_layer_mem *= s
+        shapes_mem_count += single_layer_mem
+
+    trainable_count = sum(
+        [tf.keras.backend.count_params(p) for p in model.trainable_weights]
+    )
+    non_trainable_count = sum(
+        [tf.keras.backend.count_params(p) for p in model.non_trainable_weights]
+    )
+
+    total_memory = (
+        batch_size * shapes_mem_count
+        + internal_model_mem_count
+        + trainable_count
+        + non_trainable_count
+    )
+    return total_memory
+
 
 def cleanup():
     print('interrupting gracefully')
