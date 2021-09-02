@@ -162,8 +162,6 @@ def main():
         def train_step(self, data):
             with tf.GradientTape() as tape:
                 kl_loss, total_loss, reconstruction_loss = self.get_loss(data)
-                print('got loss')
-                print(data)
                 validation_kl_loss, validation_total_loss, validation_reconstruction_loss = self.get_loss(self.validation_data)
             
                 grads = tape.gradient(total_loss, self.trainable_weights)
@@ -248,12 +246,13 @@ def main():
                     self.loss_file.write(f'loaded weights {args.loadweights:03d}\n')
                 else:
                     self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
-                    self.loss_file.write('loss\treconstruction_loss\tkl_loss\n')
+                    self.loss_file.write('loss\treconstruction_loss\tkl_loss\tvalidation_loss\tvalidation_reconstruction_loss\tvalidation_kl_loss\n')
                 
             def on_epoch_end(self, epoch, logs=None):
-                loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
-                    logs['loss'],logs['reconstruction_loss'],logs['kl_loss'])
-                print(loss_str)
+                # loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
+                #     logs['loss'],logs['reconstruction_loss'],logs['kl_loss'])
+                loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\t{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
+                    logs['loss'],logs['reconstruction_loss'],logs['kl_loss'],logs['validation_loss'],logs['validation_reconstruction_loss'],logs['validation_kl_loss'])
                 self.loss_file.write(loss_str)
                                     
                 [z_mean, z_logvar, z_sample]  = self.model.encoder.predict(self.data)
@@ -303,7 +302,7 @@ def main():
         else:
             #need to add validation data here
             vae.fit(train_set, 
-                    validation_split = 0.05,
+                    validation_split = 0.1,
                     epochs=load_weights+epochs,                     
                     batch_size=args.batch_size, 
                     callbacks=callback_list, 
