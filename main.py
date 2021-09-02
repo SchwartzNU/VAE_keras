@@ -123,38 +123,62 @@ def main():
             )
             self.kl_loss_tracker = keras.metrics.Mean(name="kl_loss")
 
+            self.validation_total_loss_tracker = keras.metrics.Mean(name="validation_total_loss")
+            self.validation_reconstruction_loss_tracker = keras.metrics.Mean(
+                name="validation_reconstruction_loss"
+            )
+            self.validation_kl_loss_tracker = keras.metrics.Mean(name="validation_kl_loss")
+
         @property
         def metrics(self):
             return [
                 self.total_loss_tracker,
                 self.reconstruction_loss_tracker,
                 self.kl_loss_tracker,
+                self.validation_total_loss_tracker,
+                self.validation_reconstruction_loss_tracker,
+                self.validation_kl_loss_tracker
             ]
         
         @tf.function
         def train_step(self, data):
             with tf.GradientTape() as tape:
-                z_mean, z_log_var, z = self.encoder(data)
-                reconstruction = self.decoder(z)
-                # reconstruction = tf.boolean_mask(reconstruction, tf.math.is_finite(reconstruction)) #get rid of nans
-                reconstruction_loss = tf.reduce_mean(
-                    tf.reduce_sum(
-                        keras.losses.mean_squared_error(data, reconstruction), axis=(1, 2)
-                    )
+                kl_loss, total_loss, reconstruction_loss = self.get_loss(data)
+                validation_kl_loss, validation_total_loss, validation_reconstruction_loss = self.get_loss(self.validation_data)
+
+            
+                grads = tape.gradient(total_loss, self.trainable_weights)
+                self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
+                self.total_loss_tracker.update_state(total_loss)
+                self.reconstruction_loss_tracker.update_state(reconstruction_loss)
+                self.kl_loss_tracker.update_state(kl_loss)
+
+            
+                #self.validation_data <- use this to add a new loss
+                return {
+                    "loss": self.total_loss_tracker.result(),
+                    "reconstruction_loss": self.reconstruction_loss_tracker.result(),
+                    "kl_loss": self.kl_loss_tracker.result(),
+                    "validation_loss": self.validation_total_loss_tracker.result(),
+                    "validation_reconstruction_loss": self.validation_reconstruction_loss_tracker.result(),
+                    "validation_kl_loss": self.validation_kl_loss_tracker.result(),
+                    
+                }
+        
+        def get_loss(self, data):
+            z_mean, z_log_var, z = self.encoder(data)
+            reconstruction = self.decoder(z)
+            # reconstruction = tf.boolean_mask(reconstruction, tf.math.is_finite(reconstruction)) #get rid of nans
+            reconstruction_loss = tf.reduce_mean(
+                tf.reduce_sum(
+                    keras.losses.mean_squared_error(data, reconstruction), axis=(1, 2)
                 )
-                kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
-                kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
-                total_loss = reconstruction_loss + kl_loss
-            grads = tape.gradient(total_loss, self.trainable_weights)
-            self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
-            self.total_loss_tracker.update_state(total_loss)
-            self.reconstruction_loss_tracker.update_state(reconstruction_loss)
-            self.kl_loss_tracker.update_state(kl_loss)
-            return {
-                "loss": self.total_loss_tracker.result(),
-                "reconstruction_loss": self.reconstruction_loss_tracker.result(),
-                "kl_loss": self.kl_loss_tracker.result(),
-            }
+            )
+            kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
+            kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
+            total_loss = reconstruction_loss + kl_loss
+            return kl_loss,total_loss,reconstruction_loss
+
         
 
     #%% load dataset
