@@ -12,6 +12,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 import make_dataset
 import os
+import glob
 import matplotlib.pyplot as plt 
 import argparse
 
@@ -45,15 +46,11 @@ def main():
                         help="number of training epochs")
     parser.add_argument("-loadweights", 
                         type=int,
-                        help="index weight file to start from")
+                        help="index weight file to start from: -1 means latest")
     parser.add_argument("-batch_size", 
                         type=int,
                         default=32,
                         help="training batch size")
-    parser.add_argument("-cross_validate",
-                        type=bool,
-                        default=True,
-                        help="cross validate on each epoch, holding out 20% of the training set")
     parser.add_argument("-adam_alpha", 
                         type=float, 
                         default=0.001,
@@ -73,8 +70,17 @@ def main():
     epochs = args.epochs
 
     if args.loadweights is not None:
-        weights_fname = os.path.join('checkpoint_latdim{}'.format(latent_dim), 
-                                    f'weights_epoch_{args.loadweights:03d}.h5')
+        if args.loadweights == -1: #latest weights
+            list_of_files = glob.glob(os.path.join('checkpoint_latdim{}'.format(latent_dim),'*'))
+            latest_file = max(list_of_files, key=os.path.getmtime)
+            s = latest_file.split('_')
+            num_part = s[3]
+            num_part = num_part.split('.')
+            args.loadweights = int(num_part[0])
+            weights_fname = latest_file
+        else:
+            weights_fname = os.path.join('checkpoint_latdim{}'.format(latent_dim), 
+                                        f'weights_epoch_{args.loadweights:03d}.h5')
         load_weights = args.loadweights
     else:
         weights_fname = None
@@ -241,20 +247,8 @@ def main():
         class SaveSampleImagesCallback(keras.callbacks.Callback):
             def __init__(self, test_sample):
                 self.data = test_sample
-                if weights_fname is not None:
-                    self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "a")
-                    self.loss_file.write(f'loaded weights {args.loadweights:03d}\n')
-                else:
-                    self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
-                    self.loss_file.write('loss\treconstruction_loss\tkl_loss\tvalidation_loss\tvalidation_reconstruction_loss\tvalidation_kl_loss\n')
                 
             def on_epoch_end(self, epoch, logs=None):
-                # loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
-                #     logs['loss'],logs['reconstruction_loss'],logs['kl_loss'])
-                loss_str = '{:7.2f}\t{:7.2f}\t{:7.2f}\t{:7.2f}\t{:7.2f}\t{:7.2f}\n'.format(
-                    logs['loss'],logs['reconstruction_loss'],logs['kl_loss'],logs['validation_loss'],logs['validation_reconstruction_loss'],logs['validation_kl_loss'])
-                self.loss_file.write(loss_str)
-                                    
                 [z_mean, z_logvar, z_sample]  = self.model.encoder.predict(self.data)
                 predictions = self.model.decoder.predict(z_sample)
                 N = self.data.shape[0]    
@@ -274,13 +268,31 @@ def main():
                 plt.savefig('training_img_latdim{}/image_at_epoch_{:04d}.png'.format(latent_dim,epoch))
                 # plt.show()
                 plt.close()
-            
-            def on_train_end(self, logs=None):
-                self.loss_file.close()
         
         os.makedirs('training_img_latdim{}'.format(latent_dim), exist_ok=True)        
         images_callback = SaveSampleImagesCallback(test_sample)
 
+    # %%write loss callback
+    if args.mode == 'train':
+        class WriteLossCallback(keras.callbacks.Callback):
+            def __init__(self):
+                if weights_fname is None:
+                    self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "w")
+                    self.loss_file.write('epoch\tloss\treconstruction_loss\tkl_loss\tvalidation_loss\tvalidation_reconstruction_loss\tvalidation_kl_loss\n')
+                else:
+                    self.loss_file = open('loss_file_latdim{}.txt'.format(latent_dim), "a")
+
+                
+            def on_epoch_end(self, epoch, logs=None):
+                loss_str = '{:d}\t{:7.2f}\t{:7.2f}\t{:7.5f}\t{:7.2f}\t{:7.2f}\t{:7.5f}\n'.format(
+                    epoch,logs['loss'],logs['reconstruction_loss'],logs['kl_loss'],
+                    logs['validation_loss'],logs['validation_reconstruction_loss'],logs['validation_kl_loss'])
+                self.loss_file.write(loss_str)
+                                                             
+            def on_train_end(self, logs=None):
+                self.loss_file.close()
+        
+        write_loss_callback = WriteLossCallback()
 
     #%% train
     if args.mode == 'train':
@@ -289,24 +301,16 @@ def main():
             vae.built = True;
             vae.load_weights(weights_fname) 
         if args.write_train_img == True:
-            callback_list = [model_checkpoint_callback, images_callback]
+            callback_list = [model_checkpoint_callback, write_loss_callback, images_callback]
         else:
-            callback_list = [model_checkpoint_callback]        
-        if not args.cross_validate:
-            vae.fit(train_set, 
-                    epochs=load_weights+epochs, 
-                    batch_size=args.batch_size, 
-                    callbacks=callback_list, 
-                    initial_epoch = load_weights)
-
-        else:
-            #need to add validation data here
-            vae.fit(train_set, 
-                    validation_split = 0.1,
-                    epochs=load_weights+epochs,                     
-                    batch_size=args.batch_size, 
-                    callbacks=callback_list, 
-                    initial_epoch = load_weights)
+            callback_list = [model_checkpoint_callback, write_loss_callback]        
+            
+        vae.fit(train_set, 
+                validation_split = 0.1,
+                epochs=load_weights+epochs,                     
+                batch_size=args.batch_size, 
+                callbacks=callback_list, 
+                initial_epoch = load_weights)
 
     #%% generate data
     if args.mode == 'generate':
