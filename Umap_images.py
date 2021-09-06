@@ -69,18 +69,18 @@ def plot_umap(data,labels_sup,labels_all,label_dict,supervised='semi',plotpoints
         embedding = umap.UMAP().fit_transform(data, y=labels_all)
     else:
         embedding = umap.UMAP().fit_transform(data)
-    fig, ax = plt.subplots(1, figsize=(5, 4))
     if plotpoints == 'validated':
         color_vals = labels_val_only
     elif plotpoints == 'unvalidated':
         color_vals = labels_unval_only
     else:
         color_vals = labels_all
-    plt.scatter(*embedding.T, s=2, c=color_vals, cmap='Spectral', alpha=1.0)
+    fig, ax = plt.subplots(1, figsize=(14, 10))
+    plt.scatter(*embedding.T, s=5, c=color_vals, cmap='Spectral', alpha=1.0)
     plt.setp(ax, xticks=[], yticks=[])
     n_types = len(label_dict)
     cbar = plt.colorbar(boundaries=np.arange(n_types+1)-0.5)
     cbar.set_ticks(np.arange(n_types))
     cbar.set_ticklabels(np.array(list(label_dict.keys())))
-    plt.title('UMAP {}_superivsed'.format(supervised));
+    plt.title('UMAP {}_superivsed plotting {}'.format(supervised, plotpoints));
 
