@@ -85,6 +85,7 @@ def main():
     else:
         weights_fname = None
         load_weights = 0
+        
     class Sampling(layers.Layer):
         """Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""
 
