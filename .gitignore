@@ -1,10 +1,7 @@
-
 *.h5
-*.png
 *.pyc
 __pycache__/*
 *.txt
 generated/*
 .DS_Store
-
 .vscode

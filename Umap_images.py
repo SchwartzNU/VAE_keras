@@ -13,7 +13,9 @@ import os
 import numpy as np
 import matplotlib.pyplot as plt
 
-def load_data_and_labels(images_dir='umap_test', im_size=32*300):
+def load_data_and_labels(validated_images_dir=os.path.join('umap_test','validated'), 
+                         unvalidated_images_dir=os.path.join('umap_test','unvalidated'),
+                         im_size=32*300):
     labels_val = list()
     labels_all = list()
     
@@ -22,7 +24,7 @@ def load_data_and_labels(images_dir='umap_test', im_size=32*300):
     type_dict = {}
     label_ind = 0
     #validated dataset    
-    for filename in glob.glob(os.path.join(images_dir,'validated','*','*.jpg')):
+    for filename in glob.glob(os.path.join(validated_images_dir,'*','*.jpg')):
         #print(filename)
         if not os.path.isdir(filename): #don't run on direcctories
             [path, _] = os.path.split(filename)
@@ -41,7 +43,7 @@ def load_data_and_labels(images_dir='umap_test', im_size=32*300):
             #print(image_data.shape)
             
     #unvalidated dataset
-    for filename in glob.glob(os.path.join(images_dir,'unvalidated','*','*.jpg')):
+    for filename in glob.glob(os.path.join(unvalidated_images_dir,'*','*.jpg')):
         #print(filename)
         if not os.path.isdir(filename): #don't run on direcctories
             [path, _] = os.path.split(filename)
