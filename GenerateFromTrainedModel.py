@@ -11,19 +11,8 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 def load_dataset_with_labels(dataset_dir):
-    train_set = tf.keras.preprocessing.image_dataset_from_directory(
-        os.path.join(dataset_dir, 'train'),
-        label_mode="categorical",
-        labels = "inferred",
-        color_mode="grayscale",
-        batch_size=32,
-        image_size=(32, 300),
-        shuffle=True,
-        seed=2,
-    )
-
-    test_set = tf.keras.preprocessing.image_dataset_from_directory(
-        os.path.join(dataset_dir, 'test'),
+    dataset = tf.keras.preprocessing.image_dataset_from_directory(
+        dataset_dir,
         label_mode="categorical", 
         labels = "inferred",
         color_mode="grayscale",
@@ -32,7 +21,7 @@ def load_dataset_with_labels(dataset_dir):
         shuffle=True,
         seed=2,
     )
-    return train_set, test_set
+    return dataset
 
 def get_label_list(dataset):
     L = list();
