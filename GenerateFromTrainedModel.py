@@ -42,7 +42,8 @@ def get_label_list(dataset):
         L.append(dataset.class_names[temp[0,0]])
     return L
 
-def generate_data(model, dataset, N_per_type=5, log_var_scale = 8):
+def generate_data(model, dataset, N_per_type=5, log_var_scale = 8, latent_dim = 0):
+    #latent dim 0 means unknown
     types = get_label_list(dataset)
     unique_types = list(set(types))
     dataset_unbatched = dataset.unbatch()
@@ -50,7 +51,8 @@ def generate_data(model, dataset, N_per_type=5, log_var_scale = 8):
     for i in range(len(unique_types)):
         print(unique_types[i])
         #ind = [index for index, element in enumerate(types) if element == unique_types[i]]
-        os.makedirs(os.path.join('generated',unique_types[i]),exist_ok=True)
+        gen_dir = 'generated_latdim{}_varScale_{}'.format(latent_dim, log_var_scale)
+        os.makedirs(os.path.join(gen_dir,unique_types[i]),exist_ok=True)
         gen_counter = 0
         while gen_counter < N_per_type:
             for d, label in dataset_unbatched.as_numpy_iterator():
@@ -66,7 +68,7 @@ def generate_data(model, dataset, N_per_type=5, log_var_scale = 8):
                     (_,r,c,_) = new_data.shape
                     new_data = new_data.reshape([r,c]).astype(int)
                     # breakpoint()
-                    fname = os.path.join('generated',unique_types[i],'{:4d}.png'.format(gen_counter))
+                    fname = os.path.join(gen_dir,unique_types[i],'{:4d}.png'.format(gen_counter))
                     plt.imsave(fname,new_data,cmap='Greys_r')
                     gen_counter = gen_counter+1
                     

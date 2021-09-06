@@ -321,7 +321,7 @@ def main():
         import GenerateFromTrainedModel as gen 
         validated_dir = 'RGCtypes_validated_473'
         (train_set, test_set) = make_dataset.load_dataset_with_labels(validated_dir)
-        gen.generate_data(vae,train_set,N_per_type=args.N_per_type,log_var_scale=args.log_var_scale)
+        gen.generate_data(vae,train_set,N_per_type=args.N_per_type,log_var_scale=args.log_var_scale,latent_dim=latent_dim)
 
 def keras_model_memory_usage_in_bytes(model, *, batch_size: int):
     """
