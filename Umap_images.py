@@ -85,4 +85,9 @@ def plot_umap(data,labels_sup,labels_all,label_dict,supervised='semi',plotpoints
     cbar.set_ticks(np.arange(n_types))
     cbar.set_ticklabels(np.array(list(label_dict.keys())))
     plt.title('UMAP {}_superivsed plotting {}'.format(supervised, plotpoints));
+    
+def main(validated_images_dir, unvalidated_images_dir):
+    image_data, labels_val, labels_all, type_dict = load_data_and_labels(validated_images_dir = validated_images_dir,
+                                                                         unvalidated_images_dir = unvalidated_images_dir)
+    plot_umap(image_data,labels_val,labels_all,type_dict,supervised='semi',plotpoints='all')
 
