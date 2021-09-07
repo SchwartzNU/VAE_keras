@@ -40,7 +40,7 @@ def generate_data(model, dataset, N_per_type=5, log_var_scale = 8, latent_dim = 
     for i in range(len(unique_types)):
         print(unique_types[i])
         #ind = [index for index, element in enumerate(types) if element == unique_types[i]]
-        gen_dir = 'generated_latdim{}_varScale_{:d}'.format(latent_dim, log_var_scale)
+        gen_dir = 'generated_latdim{}_varScale_{}'.format(latent_dim, log_var_scale)
         os.makedirs(os.path.join(gen_dir,unique_types[i]),exist_ok=True)
         gen_counter = 0
         while gen_counter < N_per_type:
