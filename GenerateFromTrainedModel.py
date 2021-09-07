@@ -40,7 +40,7 @@ def generate_data(model, dataset, N_per_type=5, log_var_scale = 8, latent_dim = 
     for i in range(len(unique_types)):
         print(unique_types[i])
         #ind = [index for index, element in enumerate(types) if element == unique_types[i]]
-        gen_dir = 'generated_latdim{}_varScale_{}'.format(latent_dim, log_var_scale)
+        gen_dir = 'generated_latdim{}_varScale_{:d}'.format(latent_dim, log_var_scale)
         os.makedirs(os.path.join(gen_dir,unique_types[i]),exist_ok=True)
         gen_counter = 0
         while gen_counter < N_per_type:
@@ -50,7 +50,7 @@ def generate_data(model, dataset, N_per_type=5, log_var_scale = 8, latent_dim = 
                 if cur_type == unique_types[i]:
                     z_mean, z_log_var, _ = model.encoder.predict(d[None,:,:,:]) 
                     # need to perturb z_sample
-                    epsilon = tf.keras.backend.random_normal(shape=(1, 2),
+                    epsilon = tf.keras.backend.random_normal(shape=(1, latent_dim),
                                                              seed=gen_counter) #why always the same?
                     z = z_mean + tf.exp(0.5 * z_log_var + log_var_scale) * epsilon
                     new_data = model.decoder.predict(z)
