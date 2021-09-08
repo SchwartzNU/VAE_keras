@@ -196,7 +196,6 @@ def main():
                     
                 }
         
-        @tf.function
         def get_loss(self, data):
             z_mean, z_log_var, z = self.encoder(data)
             reconstruction = self.decoder(z)
@@ -324,7 +323,7 @@ def main():
         if weights_fname is not None:
             vae.load_weights(weights_fname) 
         import GenerateFromTrainedModel as gen 
-        validated_dir = 'RGCtypes_validated_473'
+        validated_dir = 'RGCtypes_validated_473/train/'
         dataset = gen.load_dataset_with_labels(validated_dir)
         gen.generate_data(vae,dataset,N_per_type=args.N_per_type,log_var_scale=args.log_var_scale,latent_dim=latent_dim)
 
