@@ -31,7 +31,7 @@ def get_label_list(dataset):
         L.append(dataset.class_names[temp[0,0]])
     return L
 
-def generate_data(model, dataset, N_per_type=5, log_var_scale = 8, latent_dim = 0):
+def generate_data(model, dataset, N_per_type=1, log_var_scale = 1, latent_dim = 0):
     #latent dim 0 means unknown
     types = get_label_list(dataset)
     unique_types = list(set(types))
@@ -48,11 +48,11 @@ def generate_data(model, dataset, N_per_type=5, log_var_scale = 8, latent_dim = 
                 temp = np.argwhere(np.array(label > 0))
                 cur_type = dataset.class_names[temp[0,0]]
                 if cur_type == unique_types[i]:
-                    z_mean, z_log_var, _ = model.encoder.predict(d[None,:,:,:]) 
+                    z_mean, _ , _ = model.encoder.predict(d[None,:,:,:]) 
                     # need to perturb z_sample
                     epsilon = tf.keras.backend.random_normal(shape=(1, latent_dim),
                                                              seed=gen_counter) #why always the same?
-                    z = z_mean + tf.exp(0.5 * z_log_var + log_var_scale) * epsilon
+                    z = z_mean + tf.exp(0.5 * log_var_scale) * epsilon
                     new_data = model.decoder.predict(z)
                     (_,r,c,_) = new_data.shape
                     new_data = new_data.reshape([r,c]).astype(int)
