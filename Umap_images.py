@@ -24,7 +24,7 @@ def load_data_and_labels(validated_images_dir=os.path.join('umap_test','validate
     type_dict = {}
     label_ind = 0
     #validated dataset    
-    for filename in glob.glob(os.path.join(validated_images_dir,'*','*.jpg')):
+    for filename in glob.glob(os.path.join(validated_images_dir,'*','*.png')):
         #print(filename)
         if not os.path.isdir(filename): #don't run on direcctories
             [path, _] = os.path.split(filename)
@@ -43,7 +43,7 @@ def load_data_and_labels(validated_images_dir=os.path.join('umap_test','validate
             #print(image_data.shape)
             
     #unvalidated dataset
-    for filename in glob.glob(os.path.join(unvalidated_images_dir,'*','*.jpg')):
+    for filename in glob.glob(os.path.join(unvalidated_images_dir,'*','*.png')):
         #print(filename)
         if not os.path.isdir(filename): #don't run on direcctories
             [path, _] = os.path.split(filename)

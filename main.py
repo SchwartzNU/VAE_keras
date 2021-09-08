@@ -63,6 +63,10 @@ def main():
                         type=float, 
                         default=0.999,
                         help="beta_2 parameter for the Adam optimizer algorithm")
+    parser.add_argument("-KL_multiplier", 
+                        type=float, 
+                        default=1,
+                        help="multiplier for the KL term in the loss function")
 
     args = parser.parse_args()
 
@@ -192,18 +196,19 @@ def main():
                     
                 }
         
+        @tf.function
         def get_loss(self, data):
             z_mean, z_log_var, z = self.encoder(data)
             reconstruction = self.decoder(z)
             # reconstruction = tf.boolean_mask(reconstruction, tf.math.is_finite(reconstruction)) #get rid of nans
             reconstruction_loss = tf.reduce_mean(
-                tf.reduce_sum(
+                tf.reduce_mean(
                     keras.losses.mean_squared_error(data, reconstruction), axis=(1, 2)
                 )
             )
             kl_loss = -0.5 * (1 + z_log_var - tf.square(z_mean) - tf.exp(z_log_var))
             kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss, axis=1))
-            total_loss = reconstruction_loss + kl_loss
+            total_loss = reconstruction_loss + args.KL_multiplier * kl_loss
             return kl_loss,total_loss,reconstruction_loss
 
         
