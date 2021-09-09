@@ -9,3 +9,5 @@ training_img*/*
 *.png
 */*.png
 */*/*.png
+checkpoint*
+config.py

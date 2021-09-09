@@ -28,7 +28,7 @@ def main():
                         type=int,
                         default=10,
                         help="number of examples per type in generate mode")
-    parser.add_argument("-log_var_scale", 
+    parser.add_argument("-var_scale", 
                         type=float,
                         default=8.0,
                         help="variancce scaling in latent space for generate mode")
@@ -325,7 +325,7 @@ def main():
         import GenerateFromTrainedModel as gen 
         validated_dir = 'RGCtypes_validated_473_subset/train/'
         dataset = gen.load_dataset_with_labels(validated_dir)
-        gen.generate_data(vae,dataset,N_per_type=args.N_per_type,log_var_scale=args.log_var_scale,latent_dim=latent_dim)
+        gen.generate_data(vae,dataset,N_per_type=args.N_per_type,log_var_scale=args.var_scale,latent_dim=latent_dim)
 
 def keras_model_memory_usage_in_bytes(model, *, batch_size: int):
     """
