@@ -35,11 +35,15 @@ def load_data_and_labels(validated_images_dir=os.path.join('umap_test','validate
             label_int = type_dict[label]                
             labels_val.append(label_int)
             labels_all.append(label_int)
-            img = Image.open(filename)
+            img = plt.imread(filename)
+            if len(img.shape) == 3:
+                img = img[:,:,0]
             if image_data is None:
-                image_data = np.array(img.getdata()).reshape([1,im_size])
+                #image_data = np.array(img.getdata()).reshape([1,im_size])
+                image_data = img.reshape([1,im_size])
             else:
-                image_data = np.append(image_data,np.array(img.getdata()).reshape([1,im_size]),axis=0)
+                #image_data = np.append(image_data,np.array(img.getdata()).reshape([1,im_size]),axis=0)
+                image_data = np.append(image_data,img.reshape([1,im_size]),axis=0)
             #print(image_data.shape)
             
     #unvalidated dataset
@@ -78,7 +82,7 @@ def plot_umap(data,labels_sup,labels_all,label_dict,supervised='semi',plotpoints
     else:
         color_vals = labels_all
     fig, ax = plt.subplots(1, figsize=(14, 10))
-    plt.scatter(*embedding.T, s=5, c=color_vals, cmap='Spectral', alpha=1.0)
+    plt.scatter(*embedding.T, s=10, c=color_vals, cmap='Spectral', alpha=1.0)
     plt.setp(ax, xticks=[], yticks=[])
     n_types = len(label_dict)
     cbar = plt.colorbar(boundaries=np.arange(n_types+1)-0.5)

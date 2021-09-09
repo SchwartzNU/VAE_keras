@@ -323,7 +323,7 @@ def main():
         if weights_fname is not None:
             vae.load_weights(weights_fname) 
         import GenerateFromTrainedModel as gen 
-        validated_dir = 'RGCtypes_validated_473/train/'
+        validated_dir = 'RGCtypes_validated_473_subset/train/'
         dataset = gen.load_dataset_with_labels(validated_dir)
         gen.generate_data(vae,dataset,N_per_type=args.N_per_type,log_var_scale=args.log_var_scale,latent_dim=latent_dim)
 
