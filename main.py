@@ -323,9 +323,9 @@ def main():
         if weights_fname is not None:
             vae.load_weights(weights_fname) 
         import GenerateFromTrainedModel as gen 
-        validated_dir = 'RGCtypes_validated_473_subset/train/'
+        validated_dir = 'RGCtypes_validated_473/train_subset/'
         dataset = gen.load_dataset_with_labels(validated_dir)
-        gen.generate_data(vae,dataset,N_per_type=args.N_per_type,log_var_scale=args.var_scale,latent_dim=latent_dim)
+        gen.generate_data(vae,dataset,N_per_type=args.N_per_type,var_scale=args.var_scale,latent_dim=latent_dim)
 
 def keras_model_memory_usage_in_bytes(model, *, batch_size: int):
     """
