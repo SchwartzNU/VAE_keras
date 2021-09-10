@@ -113,10 +113,15 @@ class RGCtypes_umap:
             
         self.embedding = self.reducer.transform(self.train_data)    
                 
-    def plot_umap(self):     
-        test_embedding = self.reducer.transform(self.test_data)          
-        fig, ax = plt.subplots(1, figsize=(14, 10))
-        plt.scatter(*test_embedding.T, s=15, c=self.test_labels, cmap='Spectral', alpha=.5)
+    def plot_umap(self,dataset='test'):
+        if dataset=='test':
+            displayed_embedding = self.reducer.transform(self.test_data)
+            labels = self.test_labels
+        elif dataset=='train':
+            displayed_embedding = self.reducer.transform(self.train_data)
+            labels = self.train_labels
+        fig, ax = plt.subplots(1, figsize=(14, 10))        
+        plt.scatter(*displayed_embedding.T, s=15, c=labels, cmap='Spectral', alpha=.5)
         plt.setp(ax, xticks=[], yticks=[])
         n_types = len(self.type_dict)
         cbar = plt.colorbar(boundaries=np.arange(n_types+1)-0.5)
@@ -154,7 +159,7 @@ class RGCtypes_umap:
         	# calculate 5-fold cross validation
             result = cross_val_score(model, self.embedding, self.train_labels, 
                                      cv=cv, 
-                                     n_jobs=-1, 
+                                     n_jobs=20, 
                                      scoring='accuracy',
                                      verbose=True)
         	# calculate the mean of the scores
