@@ -11,8 +11,9 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 
 def load_dataset_with_labels(dataset_dir):
+    image_dir = os.path.join(dataset_dir,'train','validated')
     dataset = tf.keras.preprocessing.image_dataset_from_directory(
-        dataset_dir,
+        image_dir,
         label_mode="categorical", 
         labels = "inferred",
         color_mode="grayscale",
@@ -31,7 +32,7 @@ def get_label_list(dataset):
         L.append(dataset.class_names[temp[0,0]])
     return L
 
-def generate_data(model, dataset, N_per_type=1, var_scale = 1, latent_dim = 0):
+def generate_data(model, dataset, dataset_dir, N_per_type=1, var_scale = 1, latent_dim = 0):
     #latent dim 0 means unknown
     types = get_label_list(dataset)
     unique_types = list(set(types))
@@ -40,7 +41,8 @@ def generate_data(model, dataset, N_per_type=1, var_scale = 1, latent_dim = 0):
     for i in range(len(unique_types)):
         print(unique_types[i])
         #ind = [index for index, element in enumerate(types) if element == unique_types[i]]
-        gen_dir = 'generated_latdim{}_varScale_{}'.format(latent_dim, var_scale)
+        gen_dir = os.path.join(dataset_dir,
+                               'generated_latdim{}_varScale_{}'.format(latent_dim, var_scale))
         os.makedirs(os.path.join(gen_dir,unique_types[i]),exist_ok=True)
         gen_counter = 0
         while gen_counter < N_per_type:
