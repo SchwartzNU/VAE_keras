@@ -77,17 +77,20 @@ def main():
     latent_dim = args.latent_dim
     epochs = args.epochs
 
+    checkpoint_folder_name = os.path.join('checkpoint_latdim{}'.format(latent_dim),
+                                              args.dataset_dir)
+
     if args.loadweights is not None:
         if args.loadweights == -1: #latest weights
-            list_of_files = glob.glob(os.path.join('checkpoint_latdim{}'.format(latent_dim),'*'))
+            list_of_files = glob.glob(os.path.join(checkpoint_folder_name,'*'))
             latest_file = max(list_of_files, key=os.path.getmtime)
             s = latest_file.split('_')
-            num_part = s[3]
+            num_part = s[-1]
             num_part = num_part.split('.')
             args.loadweights = int(num_part[0])
             weights_fname = latest_file
         else:
-            weights_fname = os.path.join('checkpoint_latdim{}'.format(latent_dim), 
+            weights_fname = os.path.join(checkpoint_folder_name,
                                         f'weights_epoch_{args.loadweights:03d}.h5')
         load_weights = args.loadweights
     else:
@@ -241,9 +244,9 @@ def main():
     # %%checkpoint callback
 
     if args.mode == 'train':
-        os.makedirs('checkpoint_latdim{}'.format(latent_dim), exist_ok=True)        
+        os.makedirs(checkpoint_folder_name, exist_ok=True)        
         file_name = "weights_epoch_{epoch:03d}.h5"
-        checkpoint_filepath = os.path.join('checkpoint_latdim{}'.format(latent_dim), file_name)
+        checkpoint_filepath = os.path.join(checkpoint_folder_name, file_name)
         model_checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
             save_weights_only=True,
             monitor='loss',
