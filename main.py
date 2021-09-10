@@ -24,6 +24,10 @@ def main():
                         type=str,
                         default='train',
                         help="run mode: train | generate")
+    parser.add_argument("-dataset_dir",
+                        type=str,
+                        default='RGCtypes_1887',
+                        help="folder to load the train/test dataset")
     parser.add_argument("-N_per_type", 
                         type=int,
                         default=10,
@@ -214,8 +218,7 @@ def main():
 
     #%% load dataset
     if args.mode == 'train':
-        dataset_dir = 'RGCtypes_1887'
-        [train_set, test_set] = make_dataset.load_dataset_no_labels(dataset_dir)
+        [train_set, test_set] = make_dataset.load_dataset_no_labels(args.dataset_dir)
 
     # %%make test sample
 
