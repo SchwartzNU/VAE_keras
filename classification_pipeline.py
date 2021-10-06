@@ -26,7 +26,7 @@ for i in range(Nfolds):
     print('Loading images for fold {}'.format(i))
     base_dir = 'train_fold_{}'.format(i)
     U = RGCtypes_umap(validated_images_dir=os.path.join(base_dir, 'train', 'validated'), 
-                      unvalidated_images_dir=os.path.join(base_dir, 'train', 'unvalidated')) 
+                      unvalidated_images_dir=os.path.join(base_dir, 'test', 'validated')) #TODO: change the naming here
     U.load_generated_data_and_labels(os.path.join(base_dir,gen_name))
     U.make_umap_dataset('v+g', 'u')
     U_list.append(U)
